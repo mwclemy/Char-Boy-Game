@@ -134,7 +134,7 @@ Player.prototype.startPlayer = function() {
 // Increment each time by one the score when the player 
 // reaches the water blocks
 Player.prototype.countScore = function() {
-     if (this.y === playerStartY - rowHeight*5) {
+     if (this.y === (playerStartY - rowHeight*5)) {
         if (this.count == 0) {
          this.score++;
          }
