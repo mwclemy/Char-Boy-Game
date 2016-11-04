@@ -61,6 +61,8 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     // Set initial score value to 0
     this.score = 0;
+    // the variable to count the number of times the player stays in water field
+    this.count = 0;
     // Position character at the bottom of the game field
     this.startPlayer();
     // Transform keypress into movements of the character
@@ -69,6 +71,7 @@ var Player = function() {
 
 // Displays score on each player update
 Player.prototype.update = function() {
+    this.countScore();
     this.displayScore(this.score);
 }
 
@@ -126,6 +129,20 @@ Player.prototype.handleInput = function(key) {
 Player.prototype.startPlayer = function() {
     this.x = playerStartX;
     this.y = playerStartY;
+}
+
+// Increment each time by one the score when the player 
+// reaches the water blocks
+Player.prototype.countScore = function() {
+     if (this.y === playerStartY - rowHeight*5) {
+        if (this.count == 0) {
+         this.score++;
+         }
+     this.count++;
+    }
+    else {
+        this.count = 0;
+    }
 }
 
 // Send score value to the div above game field

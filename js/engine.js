@@ -76,6 +76,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
+        checkCollisions();
     
     }
 
@@ -90,6 +91,23 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+    }
+
+     /*
+     * Checks if character and enemy are standing at the same square.
+     * If yes, collision happens and game restarts from beginning 
+    */
+    function checkCollisions() {
+        for (var en in allEnemies){
+            if ( ( player.x <= allEnemies[en].x + 60 ) &&
+                ( player.x > allEnemies[en].x - allEnemies[en].dx) &&
+                ( player.y === allEnemies[en].y + 7 ) 
+                )
+            {   
+                player.score = 0;
+                player.startPlayer();
+            }
+        }
     }
 
     /* This function initially draws the "game level", it will then call
